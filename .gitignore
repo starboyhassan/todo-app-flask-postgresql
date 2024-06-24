@@ -1,0 +1,7 @@
+# Virtual Environment
+Include/
+Lib/
+Scripts/
+
+#Configuration files
+*.cfg
