@@ -2,6 +2,9 @@
 
 This is a simple web application built using Flask, a lightweight web framework in Python, and PostgreSQL, a powerful open-source relational database. The app allows users to manage their tasks with basic functionalities such as adding new tasks, marking tasks as complete, and deleting tasks. It provides a clean and intuitive interface for organizing daily tasks efficiently.
 
+![](https://github.com/starboyhassan/todo-app-flask-postgresql/blob/main/screens/Web_Page_Screen.png)
+
+
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
 
