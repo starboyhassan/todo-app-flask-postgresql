@@ -71,3 +71,20 @@ Before you begin, ensure you have met the following requirements:
    ```
 
 5. Access the application at `http://localhost:5000`.
+
+### Running the Tests
+
+This project includes a test suite to ensure the functionality of adding, deleting, and completing tasks works as expected. The tests are written using **pytest** and **pytest-flask**.
+
+1. overview of test_app.py and what each test does:
+
+- **test_add_task(client):** This test checks if a new task can be added successfully.
+- **test_delete_task(client):** This test ensures that a task can be deleted correctly.
+- **test_complete_task(client):** This test verifies that a task can be marked as complete.
+- A cleanup fixture ensures that the tasks table is cleared after each test run to maintain isolation between tests.
+
+2. Run the Tests:
+
+```
+pytest
+```
