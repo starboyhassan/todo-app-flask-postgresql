@@ -11,7 +11,7 @@ Before you begin, ensure you have met the following requirements:
 - [Python](https://www.python.org/downloads/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-## Running the Application
+## 1. Running the Application Locally
 
 ### Setting Up the Database
 
@@ -88,3 +88,35 @@ This project includes a test suite to ensure the functionality of adding, deleti
 ```
 pytest
 ```
+
+## 2. Running with Docker
+1. Build the Docker image:
+
+   ```
+   docker build -t my-flask-app .
+   ```
+
+2. Run the Docker container with host network (to access the local PostgreSQL server):
+
+   ```
+   docker run --network=host my-flask-app
+   ```
+
+3. Access the application at `http://localhost:5000`.
+
+## 3. Running App and Database with Docker compose
+
+To run the application using docker compose:
+
+```
+docker-compose up
+```
+
+This will Run both the application and the database containers and will also create a table in the database using the sql script `init.sql`
+
+To take it down run the following command:
+
+```
+docker-compose down
+```
+
