@@ -24,7 +24,7 @@ jobs:
 
     - name: Run test cases
       run: |
-        pytest test_file.py
+        pytest test_app.py
 
     - name: build docker image and push it to dockerhub
       run: |
