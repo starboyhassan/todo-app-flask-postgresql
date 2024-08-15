@@ -11,7 +11,7 @@ ENV POSTGRES_PASSWORD=123456
 RUN mkdir -p /docker-entrypoint-initdb.d
 
 # Copy the SQL script to the container
-COPY db.sql /docker-entrypoint-initdb.d/
+COPY /db_sql/db.sql /docker-entrypoint-initdb.d/
 
 # Use an existing unpriveleged user
 USER postgres
