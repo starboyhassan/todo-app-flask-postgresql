@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Database connection configuration
 db_connection = psycopg2.connect(
-    host=os.environ.get('DB_HOST', 'db'),
+    host=os.environ.get('DB_HOST', 'todo-db'),
     user=os.environ.get('DB_USER', 'postgres'),
     password=os.environ.get('DB_PASSWORD', '123456'),
     dbname=os.environ.get('DB_DATABASE', 'todoapp_db'),
