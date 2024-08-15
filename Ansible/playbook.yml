@@ -1,5 +1,41 @@
+---
 - name: install Docker on EC2
   hosts: ec2
   become: true
   roles:
     - docker
+
+- name: Pull Docker images and create a Docker network
+  hosts: ec2
+  become: true
+  tasks:
+    - name: Pull the App Docker image
+      docker_image:
+        name: "mahmoudhassan9/todo-python-app"
+        source: pull
+
+    - name: Pull the DB Docker image
+      docker_image:
+        name: "mahmoudhassan9/todo-python-db"
+        source: pull
+
+    - name: Create a Docker network
+      docker_network:
+        name: "db"
+        state: present
+
+    - name: Run the APP container and attach it to the db network
+      docker_container:
+        name: "todo-app"
+        image: "mahmoudhassan9/todo-python-app"
+        networks:
+          - name: "db"
+        state: started
+
+    - name: Run the DB container and attach it to the db network
+      docker_container:
+        name: "todo-db"
+        image: "mahmoudhassan9/todo-python-db"
+        networks:
+          - name: "db"
+        state: started

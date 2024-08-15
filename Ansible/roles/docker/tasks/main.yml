@@ -4,13 +4,6 @@
         name: docker.io
         state: present
 
-# configure jenkins to use docker
-    - name: Add jenkins user to docker group
-      user:
-        name: jenkins
-        groups: docker
-        append: yes
-
     - name: Change ownership of docker.sock
       file:
         path: /var/run/docker.sock
@@ -23,10 +16,7 @@
         path: /var/run/docker.sock
         mode: "0666"
 
-    - name: restart jenkins & docker
+    - name: restart docker
       service:
-        name: '{{ item }}'
+        name: docker
         state: restarted
-      loop:
-        - jenkins
-        - docker
