@@ -24,7 +24,13 @@ jobs:
 
     - name: build docker image and push it to dockerhub
       run: |
-        docker build -t todo-python-app .
+        docker build -t todo-python-app . -f Dockerfile_app
+        docker build -t todo-python-db . -f Dockerfile_db
+
         docker tag todo-python-app ${{ secrets.DOCKERHUB_USERNAME }}/todo-python-app:${{ github.sha }}
+        docker tag todo-python-db ${{ secrets.DOCKERHUB_USERNAME }}/todo-python-db:${{ github.sha }}
+
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_TOKEN}}
+        
         docker push mahmoudhassan9/todo-python-app:${{ github.sha }}
+        docker push mahmoudhassan9/todo-python-db:${{ github.sha }}
