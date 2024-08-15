@@ -5,3 +5,7 @@ Scripts/
 
 #Configuration files
 *.cfg
+
+#Terraform
+Terraform/.terraform/
+Terraform/.terraform.lock.hcl
