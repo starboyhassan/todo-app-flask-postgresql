@@ -9,3 +9,4 @@ Scripts/
 #Terraform
 Terraform/.terraform/
 Terraform/.terraform.lock.hcl
+Terraform/Mykaypair.pem
