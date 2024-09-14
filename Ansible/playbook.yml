@@ -31,6 +31,7 @@
         networks:
           - name: "db"
         state: started
+        restart: "unless-stopped"
 
     - name: Run the DB container and attach it to the db network
       docker_container:
@@ -39,3 +40,4 @@
         networks:
           - name: "db"
         state: started
+        restart: "unless-stopped"

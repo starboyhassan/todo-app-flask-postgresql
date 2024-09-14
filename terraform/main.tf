@@ -18,7 +18,7 @@ module "subnet" {
    source             = "./modules/ec2"
    ami                = "ami-04a81a99f5ec58529" 
    instance_type      = "t2.micro"
-   key_name           = "Mykeypair"
+   key_name           = "MyKey"
    subnet_id          = module.subnet.id
    security_group_ids = [module.security_group.id]
  }
