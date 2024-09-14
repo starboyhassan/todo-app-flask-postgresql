@@ -26,3 +26,26 @@ spec:
             requests:
               cpu: "0.5"   
               memory: "128Mi" 
+              
+          env:
+            - name: POSTGRES_DATABASE_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: POSTGRES_DATABASE
+                  
+            - name: POSTGRES_DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: POSTGRES_DATABASE_HOST
+                  
+            - name: POSTGRES_DATABASE_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: POSTGRES_DATABASE_USER
+                  
+        
+
+            
