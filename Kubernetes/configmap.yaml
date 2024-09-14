@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: configmap 
 data:
-  MYSQL_DATABASE_USER: "posgres"
-  MYSQL_DATABASE_HOST: "posgres-service"
-  MYSQL_DATABASE: "todoapp_db"
+  POSTGRES_DATABASE_USER: "posgres"
+  POSTGRES_DATABASE_HOST: "posgres-service"
+  POSTGRES_DATABASE: "todoapp_db"
