@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-statefulset
+spec:
+  serviceName: postgres-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+      
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: mahmoudhassan9/todo-python-db
+
+          env:
+            - name: POSTGRES_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: POSTGRES_DATABASE_PASSWORD
+
+          ports:
+            - containerPort: 5432
+
+          volumeMounts:
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        - name: postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: pvc
+            
+            
