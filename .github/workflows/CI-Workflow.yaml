@@ -31,10 +31,10 @@ jobs:
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_REPO }}
 
     - name: Build and Tag App Image
-      run: docker build -t ${{ env.ECR_REPO }}:${{ env.APP_IMAGE_NAME }}-${{ github.sha }} -f Dockerfile_app
+      run: docker build -t ${{ env.ECR_REPO }}:${{ env.APP_IMAGE_NAME }}-${{ github.sha }} -f Dockerfile_app .
 
     - name: Build and Tag DB Image
-      run: docker build -t ${{ env.ECR_REPO }}:${{ env.DB_IMAGE_NAME }}-${{ github.sha }} -f Dockerfile_db
+      run: docker build -t ${{ env.ECR_REPO }}:${{ env.DB_IMAGE_NAME }}-${{ github.sha }} -f Dockerfile_db .
 
     - name: Push App Image to ECR
       run: docker push ${{ env.ECR_REPO }}:${{ env.APP_IMAGE_NAME }}-${{ github.sha }}
