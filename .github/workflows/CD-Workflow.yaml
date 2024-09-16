@@ -1,0 +1,43 @@
+name: Continuous Deployment
+
+on:
+  workflow_run:
+    workflows: ["Continuous Integration"]
+    types:
+      - completed
+
+env:
+  ECR_REPO: '767397888237.dkr.ecr.us-east-1.amazonaws.com/project_repo'  # ECR repo
+  APP_IMAGE_NAME: 'todo-python-app'                                              # name of App image
+  DB_IMAGE_NAME: 'todo-python-db'                                                  # name of DB image
+  DEPLOYMENT_PATH: 'Kubernetes/deployment.yaml'                                  # path to deployment.yml in GitHub repo
+  STATEFULSET_PATH: 'Kubernetes/statefulset.yaml'                                # path to statefulset.yml in GitHub repo
+
+
+
+jobs:
+    deploy:
+        runs-on: [self-hosted]
+
+        # Check if the CI workflow was successful
+        if: github.event.workflow_run.conclusion == 'success'
+
+        steps:
+        - name: Update Kubernetes Deployment and StatefulSet Manifests files with new images tag
+          run: |
+              sed -i 's|image:.*|image: ${{ env.ECR_REPO }}:${{ env.APP_IMAGE_NAME }}-${{ github.sha }}|g' ${{ env.DEPLOYMENT_PATH }}
+              sed -i 's|image:.*|image: ${{ env.ECR_REPO }}:${{ env.DB_IMAGE_NAME }}-${{ github.sha }}|g' ${{ env.STATEFULSET_PATH }}
+    
+        - name: Deploy to EKS Cluster
+          env:
+                KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          run: |
+                kubectl apply -f Kubernetes
+    
+        - name: Get Website URL
+          env:
+             KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          run: |
+             url=$(kubectl get svc deployment_service -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+             echo "Website URL: http://$url/"
+    
