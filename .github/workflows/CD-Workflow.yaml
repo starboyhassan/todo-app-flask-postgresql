@@ -38,7 +38,7 @@ jobs:
           env:
              KUBECONFIG: ${{ secrets.KUBECONFIG }}
           run: |
-             url=$(kubectl get svc deployment_service -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
+             url=$(kubectl get svc todo-app-service -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")
              echo "Website URL: http://$url/"
 
         - name: Send a Slack Notification
