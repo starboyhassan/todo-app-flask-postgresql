@@ -2,6 +2,11 @@
 - name: install AWS CLI
   hosts: EC2
   roles:
+    - jenkins
+
+- name: install AWS CLI
+  hosts: EC2
+  roles:
     - aws_cli
 
 - name: install kubectl
